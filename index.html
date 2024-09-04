@@ -1,0 +1,173 @@
+<html lang="pt-BR">
+<head><script src="/gdpr/gdprscript.js?buildTime=1725466399"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rádios Online</title>
+    <style>
+       body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    background-color: #f0f0f0;
+}
+
+h1 {
+    text-align: center;
+    color: #333;
+    margin: 20px 0;
+    font-size: 1.5em;
+}
+
+.radio-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+    padding: 10px;
+}
+
+img {
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 5px;
+    width: 100px; /* Largura reduzida para telas menores */
+    transition: box-shadow 0.3s;
+    cursor: pointer;
+}
+
+img:hover {
+    box-shadow: 0 0 5px 2px rgba(0, 140, 186, 0.5);
+}
+
+.player-container {
+    margin-top: auto;
+    background-color: #f8f8f8;
+    padding: 15px;
+    box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+audio {
+    width: 100%;
+    max-width: 300px; /* Ajuste do tamanho do player */
+}
+
+.offline-message {
+    display: none;
+    color: red;
+    font-weight: bold;
+    margin-top: 10px;
+}
+
+.station-info {
+    font-weight: bold;
+    margin: 10px 0;
+}
+
+/* Media Query para telas menores */
+@media (max-width: 600px) {
+    img {
+        width: 80px; /* Reduzir ainda mais a largura das imagens */
+    }
+
+    h1 {
+        font-size: 1.2em; /* Reduzir o tamanho do título */
+    }
+
+    .radio-container {
+        gap: 5px; /* Reduzir o espaço entre as imagens */
+        padding: 5px;
+    }
+
+    .player-container {
+        padding: 10px;
+    }
+}
+
+    </style>
+    <script type="text/javascript">
+        // Função para abrir a rádio em uma nova janela pop-up
+        function openPopup(url) {
+            const width = 400;  // Largura da janela pop-up
+            const height = 300; // Altura da janela pop-up
+            const left = (window.innerWidth / 2) - (width / 2); // Centraliza horizontalmente
+            const top = (window.innerHeight / 2) - (height / 2); // Centraliza verticalmente
+
+            const popup = window.open(url, 'radioPopup', `width=${width},height=${height},top=${top},left=${left},scrollbars=yes,resizable=yes`);
+            popup.focus();
+        }
+
+        // Função para mudar a fonte do player de áudio
+        function changeStation(url, stationName) {
+            const audioPlayer = document.getElementById('audioPlayer');
+            const offlineMessage = document.getElementById('offlineMessage');
+            const stationInfo = document.getElementById('stationInfo');
+            audioPlayer.src = url;
+
+            // Atualiza o nome da estação
+            stationInfo.textContent = `Estação atual: ${stationName}`;
+
+            // Oculta a mensagem offline antes de tentar carregar a rádio
+            offlineMessage.style.display = 'none';
+
+            // Verifica se o áudio pode ser reproduzido
+            audioPlayer.onerror = function() {
+                offlineMessage.style.display = 'block';
+            };
+
+            // Tenta reproduzir o áudio
+            audioPlayer.play().catch(() => {
+                offlineMessage.style.display = 'block';
+            });
+        }
+    </script>
+</head>
+<body>
+    <h1>Estações de Rádio Online</h1>
+    <div class="radio-container">
+        <img src="//cdn.onlineradiobox.com/img/l/5/31685.v6.png" title="Radio Ecclesia Luanda, 97.5 MHz FM" alt="Radio Ecclesia Luanda" onclick="changeStation('https://mediaserv33.live-streams.nl:8089/stream', 'Radio Ecclesia Luanda')">
+        <img src="//cdn.onlineradiobox.com/img/l/7/31687.v5.png" title="Luanda Antena Comercial 95.5 MHz FM" alt="Luanda Antena Comercial" onclick="changeStation('https://live.paineldj.com.br/proxy/radiolac?mp=/stream', 'Luanda Antena Comercial')">
+        <img src="//cdn.onlineradiobox.com/img/l/8/31688.v4.png" title="Radio Fama Star Gospel Salsa" alt="Radio Fama Star Gospel Salsa" onclick="openPopup('http://sirius.shoutca.st:8527/stream')">
+        <img src="//cdn.onlineradiobox.com/img/l/2/31682.v12.png" title="RNA - Canal A Luanda, 96.5 MHz FM" alt="RNA - Canal A Luanda" onclick="changeStation('https://radios.vpn.sapo.pt/AO/radio3.mp3', 'RNA - Canal A Luanda')">
+        <img src="//cdn.onlineradiobox.com/img/l/4/37794.v4.png" title="RFI Portugues pop.news.talk" alt="RFI Portugues" onclick="changeStation('https://rfienportugais64k.ice.infomaniak.ch/rfienportugais-64.mp3', 'RFI Portugues')">
+        <img src="//cdn.onlineradiobox.com/img/l/3/97693.v6.png" title="Radio KAJI FM Paixao e musica" alt="Radio KAJI FM" onclick="changeStation('https://s07.maxcast.com.br:8022/live', 'Radio KAJI FM')">
+        <img src="//cdn.onlineradiobox.com/img/l/7/31707.v5.png" title="Ngola Radio Luanda, 87.7 MHz FM" alt="Ngola Radio Luanda" onclick="changeStation('https://stream.zenolive.com/4xa2ects7a5tv', 'Ngola Radio Luanda')">
+        <img src="//cdn.onlineradiobox.com/img/l/8/104878.v1.png" title="Rede Digital Gospel" alt="Rede Digital Gospel" onclick="changeStation('https://stream.zeno.fm/6nwb80z2dy8uv', 'Rede Digital Gospel')">
+        <img src="//cdn.onlineradiobox.com/img/l/5/85815.v5.png" title="Powermix FM dance.trance.house.90s" alt="Powermix FM" onclick="changeStation('https://cast.iplayradio.net/radio/9500/stream', 'Powermix FM')">
+        <img src="//cdn.onlineradiobox.com/img/l/8/99938.v3.png" title="Rádio Lemba Luanda, 89.0 MHz FM" alt="Rádio Lemba Luanda" onclick="changeStation('https://centova87.instainternet.com/proxy/radiolemba?mp=/stream', 'Rádio Lemba Luanda')">
+        <img src="//cdn.onlineradiobox.com/img/l/2/106222.v1.png" title="Rádio Nosso Tempo gospel" alt="Rádio Nosso Tempo" onclick="changeStation('http://stm25.srvstm.com:6756/RadioNossoTempo.pls?sid=1', 'Rádio Nosso Tempo')">
+        <img src="//cdn.onlineradiobox.com/img/l/2/94922.v3.png" title="Som News Angola Luanda 99.9 MHz FM" alt="Som News Angola" onclick="changeStation('https://stream.zeno.fm/y1dkpe3pnd0uv', 'Som News Angola')">
+        <img src="//cdn.onlineradiobox.com/img/l/1/47681.v15.png" title="Radio Kuia Bue" alt="Radio Kuia Bue" onclick="changeStation('https://a6.asurahosting.com:6820/radio.aac', 'Radio Kuia Bue')">
+        <img src="//cdn.onlineradiobox.com/img/l/7/105437.v1.png" title="ISPAJ Fm" alt="ISPAJ Fm" onclick="changeStation('https://stream.zeno.fm/e396wu9zmv8uv', 'ISPAJ Fm')">
+        <img src="//cdn.onlineradiobox.com/img/l/5/107585.v2.png" title="Radio X 90.3" alt="Radio X 90.3" onclick="changeStation('https://stream.zeno.fm/pamgq3tqq68uv', 'Radio X 90.3')">
+        <img src="//cdn.onlineradiobox.com/img/l/9/126859.v1.png" title="Radio Luanda live" alt="Radio Luanda live" onclick="changeStation('https://sonicpanel.oficialserver.com:7166/;', 'Radio Luanda live')">
+        <img src="//cdn.onlineradiobox.com/img/l/4/132504.v2.png" title="RADIO ZANGO 8000" alt="RADIO ZANGO 8000" onclick="changeStation('https://stream1.svrdedicado.org/8042/stream', 'RADIO ZANGO 8000')">
+        <img src="//cdn.onlineradiobox.com/img/l/2/134192.v2.png" title="Antenna Web Luanda" alt="Antenna Web Luanda" onclick="changeStation('https://tinyurl.com/AntennawebAngola', 'Antenna Web Luanda')">
+        <img src="//cdn.onlineradiobox.com/img/l/9/132629.v1.png" title="Rádio Estalagem" alt="Rádio Estalagem" onclick="changeStation('https://stream.zeno.fm/rsjv86wfioovv', 'Rádio Estalagem')">
+        <img src="//cdn.onlineradiobox.com/img/l/7/114397.v9.png" title="Rádio Valerfm" alt="Rádio Valerfm" onclick="changeStation('https://stream.zeno.fm/ub1fy05s538uv', 'Rádio Valerfm')">
+        <img src="//cdn.onlineradiobox.com/img/l/0/122950.v3.png" title="Rádio Fé Angola" alt="Rádio Fé Angola" onclick="changeStation('https://stream.zeno.fm/gsndh1xvczetv', 'Rádio Fé Angola')">
+        <img src="https://github.com/ruicirilo/Radios-Angola/blob/main/radio%20mais.png?raw=true" title="Rádio Mais" alt="Rádio Mais" onclick="changeStation('https://radios.justweb.pt/8050/stream/', 'Rádio Mais')">
+      
+      
+        <img src="//cdn.onlineradiobox.com/img/l/2/31702.v10.png" title="Radio Muzangala" alt="Radio Muzangala" onclick="changeStation('https://us4new.listen2myradio.com:2199/listen.php?port=10053&type=s1&mount=/stream', 'Radio Muzangala')">
+      
+      <img src="//cdn.onlineradiobox.com/img/logo/4/139034.png" title="Hero Radio (Angola)" alt="Hero Radio (Angola)" onclick="changeStation('https://a2.asurahosting.com:6790/angola.mp3','Hero Radio (Angola)')">
+
+    </div>
+    <div class="player-container">
+        <div id="stationInfo" class="station-info">
+            Estação atual: Nenhuma
+        </div>
+        <audio id="audioPlayer" controls>
+            <source src="" type="audio/mpeg">
+            Seu navegador não suporta o elemento de áudio.
+        </audio>
+        <div id="offlineMessage" class="offline-message">
+            A rádio está offline
+        </div>
+    </div>
+</body>
+</html>
